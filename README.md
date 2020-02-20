@@ -17,3 +17,7 @@ If we give 64 as input, the program will turn every 8x8 cube of pixels to a sing
 27 * 25 = 675 (total amount of pixels of new image)
 
 We can also call this proccess a kind of bluring.
+
+<hr>
+
+![](before_pixelate.png)

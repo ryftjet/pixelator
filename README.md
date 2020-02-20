@@ -22,4 +22,4 @@ We can also call this proccess a kind of bluring.
 
 
 
-<img src="before_pixelate.png" width="50%" height="50%" />  <img src="after_pixelate.png" width="50%" height="50%" />
+<img src="before_pixelate.png" width="20%" height="20%" />  <img src="after_pixelate.png" width="50%" height="50%" />

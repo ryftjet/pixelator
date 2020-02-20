@@ -20,6 +20,6 @@ We can also call this proccess a kind of bluring.
 
 <hr>
 
-#![](before_pixelate.png=100x100) ![](after_pixelate.png)
 
-<img src="before_pixelate.png" width="200" height="400" />
+
+<img src="before_pixelate.png" width="½50" height="½50" />  <img src="after_pixelate.png" width="½50" height="½50" />

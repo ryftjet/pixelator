@@ -20,4 +20,4 @@ We can also call this proccess a kind of bluring.
 
 <hr>
 
-![Before](before_pixelate.png) ![After](after_pixelate.png)
+![](before_pixelate.png) ![](after_pixelate.png)

@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
-from PIL import Image, ImageTk
+from tkinter.messagebox import showerror
+from PIL import Image, ImageTk, UnidentifiedImageError
 from math import floor, sqrt
 from copy import deepcopy
 
@@ -42,9 +43,7 @@ class PixelateApp:
         self.pixel_scale_rate.pack(fill="x")
         self.pixel_scale_rate.bind(
             "<ButtonRelease>",
-            lambda scale_rate: self.decrease_pixel_quality(
-                int(self.pixel_scale_rate.get())
-            )
+            lambda _: self.decrease_pixel_quality()
         )
 
         self.image_label = Label(self.root)
@@ -54,8 +53,16 @@ class PixelateApp:
 
     def add_image(self) -> None:
         # Open the image file
-        file_path = filedialog.askopenfilename()
-        self.original_image = Image.open(file_path)
+        file_path = filedialog.askopenfilename(filetypes=[('Image Files', '*.png')])
+        try:
+            self.original_image = Image.open(file_path)
+        except FileNotFoundError:
+            # No image selected, ignore
+            return
+        except UnidentifiedImageError:
+            # Non-image selected
+            showerror('Image Not Found', f'The selected file is not an image: {file_path}')
+            return
 
         self.image_to_show = ImageTk.PhotoImage(self.original_image)
         # Disable inspections because self.image_to_show is technically not a Tkinter Image
@@ -63,9 +70,18 @@ class PixelateApp:
         self.image_label.configure(image=self.image_to_show)
         self.size_label.configure(text=f'{self.original_image.size[0]} x {self.original_image.size[1]}', justify="left")
 
-    def decrease_pixel_quality(self, depth: int) -> None:
+        # Run the initial
+        self.decrease_pixel_quality()
+
+    def decrease_pixel_quality(self) -> None:
         """Pixelate the image"""
+        # No image selected yet, do nothing
+        if not self.original_image:
+            return
+
+        # Get the image and the depth
         image_to_change = deepcopy(self.original_image)
+        depth = int(self.pixel_scale_rate.get())
 
         size = image_to_change.size
         x_off = divmod(size[0], int(sqrt(depth)))
